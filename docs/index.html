@@ -14,15 +14,19 @@ window.addEventListener('DOMContentLoaded', () =>
 		input.value = `${ event.key } ${ event.keyCode }(${ event.code }) [${ event.shiftKey ? 'S' : '' }${ event.ctrlKey ? 'C' : '' }${ event.altKey ? 'A' : '' }${ event.metaKey ? 'M' : '' }]`;
 	} );
 
+	const kinput = document.getElementById( 'kinput' );
 	document.getElementById( 'keyboard' ).addEventListener( 'push', ( event ) =>
 	{
-		console.log( event.detail );
+		kinput.value = `${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' }`;
 	} );
 } );
 </script>
 </head>
 <body>
 	<tp-keyboard id="keyboard" style="width:400px;"></tp-keyboard>
+	<div>
+		<input id="kinput" readonly style="font-size:3rem;">
+	</div>
 	<div>
 		<input id="input" readonly style="font-size:3rem;">
 	</div>

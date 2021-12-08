@@ -3,11 +3,17 @@ interface TitanPocketKeyboardElement extends HTMLElement
 	addEventListener( type: 'push', listener: ( event: KeyboardPushEvent ) => any, options?: boolean | AddEventListenerOptions ): void;
 }
 
-type TITAN_POCKET_KEYS = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'space' | 'backspace' | 'enter' | 'shift' | 'alt' | 'fn' | 'menu' | 'back' | 'sym';
+type TITAN_POCKET_KEYS = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'space' | 'backspace' | 'enter' | 'shift' | 'alt' | 'fn' | 'menu' | 'back' | 'symbol';
 
-interface KeyboardPushData
+interface KeyData
+{
+	keyCode: number;
+	code: string;
+}
+interface KeyboardPushData extends KeyData
 {
 	button: TITAN_POCKET_KEYS;
+	usable: boolean;
 }
 
 interface KeyboardPushEvent extends CustomEvent
@@ -57,27 +63,27 @@ interface KeyboardPushEvent extends CustomEvent
 		{ name: 'menu', back: 'm92 2h18v13h-20v-2z', top: 'm90 0h20v2h-18z', side: 'm92 2-2-2v13z', front: 'm96.5 4.5v7h7v-7zm1 1h5v5h-5z' },
 		{ name: 'finger', back: 'm61 1h28v13h-28z', top: 'm60 0h30l-1 1h-28v13l-1 1z', side: 'm90 0-1 1v13h-28l-1 1h30z', front: '' },
 		{ name: 'back', back: 'm40 2h18l2 11v2h-20z', top: 'm40 0h20l-2 2h-18z', side: 'm60 0-2 2 2 11z', front: 'm52.5 4.1914-7.6172 3.8086 7.6172 3.8086zm-1 1.6172v4.3828l-4.3828-2.1914z' },
-		{ name: 'sym', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
+		{ name: 'symbol', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
 		{ name: 'shift', back: 'm0 2h18l2 11v2h-20z', top: 'm0 0h20l-2 2h-18z', side: 'm20 0-2 2 2 11z', front: 'm10 2.293-5.207 5.207h2.707v3h5v-3h2.707zm0 1.4141 2.793 2.793h-1.293v3h-3v-3h-1.293zm-2.5 7.793v1h5v-1z' },
 	];
 
-	const keymap: { [ keys in TITAN_POCKET_KEYS ]: number } =
+	const keymap: { [ keys in TITAN_POCKET_KEYS ]: KeyData } =
 	{
-		a: 65, b: 66, c: 67, d: 68, e: 69,
-		f: 70, g: 71, h: 72, i: 73, j: 74,
-		k: 75, l: 76, m: 77, n: 78, o: 79,
-		p: 80, q: 81, r: 82, s: 83, t: 84,
-		u: 85, v: 86, w: 87, x: 88, y: 89,
-		z: 90,
-		space: 32,
-		backspace: 8,
-		enter: 13,
-		shift: 16, // LeftShift
-		alt: 18, // AltRight
-		fn: -1, // F13
-		menu: -1,
-		back: -1,
-		sym: 0, // ContextMenu
+		a: { keyCode: 65, code: 'KeyA' }, b: { keyCode: 66, code: 'KeyB' }, c: { keyCode: 67, code: 'KeyC' }, d: { keyCode: 68, code: 'KeyD' }, e: { keyCode: 69, code: 'KeyE' },
+		f: { keyCode: 70, code: 'KeyF' }, g: { keyCode: 71, code: 'KeyG' }, h: { keyCode: 72, code: 'KeyH' }, i: { keyCode: 73, code: 'KeyI' }, j: { keyCode: 74, code: 'KeyJ' },
+		k: { keyCode: 75, code: 'KeyK' }, l: { keyCode: 76, code: 'KeyL' }, m: { keyCode: 77, code: 'KeyM' }, n: { keyCode: 78, code: 'KeyN' }, o: { keyCode: 79, code: 'KeyO' },
+		p: { keyCode: 80, code: 'KeyP' }, q: { keyCode: 81, code: 'KeyQ' }, r: { keyCode: 82, code: 'KeyR' }, s: { keyCode: 83, code: 'KeyS' }, t: { keyCode: 84, code: 'KeyT' },
+		u: { keyCode: 85, code: 'KeyU' }, v: { keyCode: 86, code: 'KeyV' }, w: { keyCode: 87, code: 'KeyW' }, x: { keyCode: 88, code: 'KeyX' }, y: { keyCode: 89, code: 'KeyY' },
+		z: { keyCode: 90, code: 'KeyZ' },
+		space: { keyCode: 32, code: 'Space' },
+		backspace: { keyCode: 8, code: 'Backspace' },
+		enter: { keyCode: 13, code: 'Enter' },
+		shift: { keyCode: 16, code: 'ShiftLeft' },
+		alt: { keyCode: 18, code: 'AltRight' },
+		fn: { keyCode: 0, code: 'F13' },
+		menu: { keyCode: -1, code: 'Menu' },
+		back: { keyCode: -1, code: 'Back' },
+		symbol: { keyCode: 0, code: 'ContextMenu' },
 	};
 
 	( ( component, tagname = 'tp-keyboard' ) =>
@@ -151,7 +157,9 @@ interface KeyboardPushEvent extends CustomEvent
 
 				back.classList.add( 'button' );
 				back.addEventListener( 'click', () => {
-					this.dispatchEvent( new CustomEvent<KeyboardPushData>( 'push', { detail: { button: <TITAN_POCKET_KEYS>button.name } } ) );
+					const name = <TITAN_POCKET_KEYS>button.name;
+					const data = Object.assign( { button: name, usable: 0 <= keymap[ name ].keyCode }, keymap[ name ] );
+					this.dispatchEvent( new CustomEvent<KeyboardPushData>( 'push', { detail: data } ) );
 				} );
 
 				if ( typeof button.front === 'string' )
@@ -186,16 +194,6 @@ interface KeyboardPushEvent extends CustomEvent
 					sub.classList.add( 'sub' );
 					group.appendChild( sub );
 				}
-				/*
-  <path d="m0 2h18l2 11v2h-20z" fill="#4d4d4d"/>
-  <path d="m0 0h20l-2 2h-18z" fill="#b3b3b3"/>
-  <path d="m20 0-2 2 2 11z" fill="#666"/>
-  <path d="m10 2.293-5.207 5.207h2.707v3h5v-3h2.707zm0 1.4141 2.793 2.793h-1.293v3h-3v-3h-1.293zm-2.5 7.793v1h5v-1z" fill="#f2f2f2"/>
-  <text x="8" y="70" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">Z</text>
-  <text x="3" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">!</text>
-  <text x="120" y="11" fill="#f2f2f2" font-family="Bahnschrift" font-size="8px" text-align="center" text-anchor="middle">fn</text>
-
-				*/
 			} );
 
 			const contents = document.createElement( 'div' );

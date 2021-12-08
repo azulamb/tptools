@@ -39,9 +39,26 @@
         { name: 'menu', back: 'm92 2h18v13h-20v-2z', top: 'm90 0h20v2h-18z', side: 'm92 2-2-2v13z', front: 'm96.5 4.5v7h7v-7zm1 1h5v5h-5z' },
         { name: 'finger', back: 'm61 1h28v13h-28z', top: 'm60 0h30l-1 1h-28v13l-1 1z', side: 'm90 0-1 1v13h-28l-1 1h30z', front: '' },
         { name: 'back', back: 'm40 2h18l2 11v2h-20z', top: 'm40 0h20l-2 2h-18z', side: 'm60 0-2 2 2 11z', front: 'm52.5 4.1914-7.6172 3.8086 7.6172 3.8086zm-1 1.6172v4.3828l-4.3828-2.1914z' },
-        { name: 'sym', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
+        { name: 'symbol', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
         { name: 'shift', back: 'm0 2h18l2 11v2h-20z', top: 'm0 0h20l-2 2h-18z', side: 'm20 0-2 2 2 11z', front: 'm10 2.293-5.207 5.207h2.707v3h5v-3h2.707zm0 1.4141 2.793 2.793h-1.293v3h-3v-3h-1.293zm-2.5 7.793v1h5v-1z' },
     ];
+    const keymap = {
+        a: { keyCode: 65, code: 'KeyA' }, b: { keyCode: 66, code: 'KeyB' }, c: { keyCode: 67, code: 'KeyC' }, d: { keyCode: 68, code: 'KeyD' }, e: { keyCode: 69, code: 'KeyE' },
+        f: { keyCode: 70, code: 'KeyF' }, g: { keyCode: 71, code: 'KeyG' }, h: { keyCode: 72, code: 'KeyH' }, i: { keyCode: 73, code: 'KeyI' }, j: { keyCode: 74, code: 'KeyJ' },
+        k: { keyCode: 75, code: 'KeyK' }, l: { keyCode: 76, code: 'KeyL' }, m: { keyCode: 77, code: 'KeyM' }, n: { keyCode: 78, code: 'KeyN' }, o: { keyCode: 79, code: 'KeyO' },
+        p: { keyCode: 80, code: 'KeyP' }, q: { keyCode: 81, code: 'KeyQ' }, r: { keyCode: 82, code: 'KeyR' }, s: { keyCode: 83, code: 'KeyS' }, t: { keyCode: 84, code: 'KeyT' },
+        u: { keyCode: 85, code: 'KeyU' }, v: { keyCode: 86, code: 'KeyV' }, w: { keyCode: 87, code: 'KeyW' }, x: { keyCode: 88, code: 'KeyX' }, y: { keyCode: 89, code: 'KeyY' },
+        z: { keyCode: 90, code: 'KeyZ' },
+        space: { keyCode: 32, code: 'Space' },
+        backspace: { keyCode: 8, code: 'Backspace' },
+        enter: { keyCode: 13, code: 'Enter' },
+        shift: { keyCode: 16, code: 'ShiftLeft' },
+        alt: { keyCode: 18, code: 'AltRight' },
+        fn: { keyCode: 0, code: 'F13' },
+        menu: { keyCode: -1, code: 'Menu' },
+        back: { keyCode: -1, code: 'Back' },
+        symbol: { keyCode: 0, code: 'ContextMenu' },
+    };
     ((component, tagname = 'tp-keyboard') => {
         if (customElements.get(tagname)) {
             return;
@@ -99,7 +116,9 @@
                 }
                 back.classList.add('button');
                 back.addEventListener('click', () => {
-                    this.dispatchEvent(new CustomEvent('push', { detail: { button: button.name } }));
+                    const name = button.name;
+                    const data = Object.assign({ button: name, usable: 0 <= keymap[name].keyCode }, keymap[name]);
+                    this.dispatchEvent(new CustomEvent('push', { detail: data }));
                 });
                 if (typeof button.front === 'string') {
                     const front = document.createElementNS('http://www.w3.org/2000/svg', 'path');
