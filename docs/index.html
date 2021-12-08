@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>TitanPocket tools</title>
+<script src="./tp-keyboard.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () =>
+{
+	document.addEventListener( 'backbutton', () => {}, false);
+	const input = document.getElementById( 'input' );
+	window.addEventListener( 'keydown', ( event ) =>
+	{
+		input.value = `${ event.key } ${ event.keyCode }(${ event.code }) [${ event.shiftKey ? 'S' : '' }${ event.ctrlKey ? 'C' : '' }${ event.altKey ? 'A' : '' }${ event.metaKey ? 'M' : '' }]`;
+	} );
+
+	document.getElementById( 'keyboard' ).addEventListener( 'push', ( event ) =>
+	{
+		console.log( event.detail );
+	} );
+} );
+</script>
+</head>
+<body>
+	<tp-keyboard id="keyboard"></tp-keyboard>
+	<div>
+		<input id="input" readonly>
+	</div>
+</body>
+</html>
