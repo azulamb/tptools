@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="220" height="395" version="1.1" viewBox="0 0 220 395" xmlns="http://www.w3.org/2000/svg">
+ <rect x="215" y="80" width="5" height="35" fill="#d40000" fill-rule="evenodd"/>
+ <g fill="#333" fill-rule="evenodd">
+  <rect x="215" y="125" width="5" height="35"/>
+  <rect y="80" width="5" height="35"/>
+  <rect y="125" width="5" height="35"/>
+ </g>
+ <path d="m85 0-15 5-20 5-5-5-25 10-15 10-5 20 5 145v25l-5 60v85l10 15 15 15 5-5 80 10 80-10 5 5 15-15 10-15v-85l-5-60v-25l5-145-5-20-15-10-25-10-5 5-20-5-15-5zm-75 40h200v311.67l-13.334 13.334h-173.33l-13.334-13.334z" fill="#808080"/>
+ <path d="m10 355 25 25 10-10 65 10 65-10 10 10 25-25v-90h-200z" fill="#666"/>
+ <path d="m75 10-15 10 5 5 45 10 45-10 5-5-15-10z" fill="#666"/>
+ <path d="m110 25-25-10h50z" fill="#ccc"/>
+ <path d="m30 385 15-15 65 10v15z" fill="#333"/>
+ <path d="m110 380v15l80-10-15-15z" fill="#4d4d4d"/>
+ <path d="m220 360-10-5-25 25 10 10 15-15z" fill="#999"/>
+ <path d="m10 355-10 5 10 15 15 15 10-10z" fill="#333"/>
+ <g fill="#4d4d4d">
+  <path d="m10 345h-10v15l10-5z"/>
+  <path d="m210 345v10l10 5v-15z"/>
+  <path d="m0 45h10v-5l-5-15z"/>
+  <path d="m210 40v5h10l-5-20z"/>
+ </g>
+ <path d="m5 25 5 15 50-20-15-15-25 10z" fill="#666"/>
+ <path d="m175 5-15 15 50 20 5-15-15-10z" fill="#333"/>
+ <path d="m70 5-20 5 10 10 15-10z" fill="#666"/>
+ <path d="m150 5 20 5-10 10-15-10z" fill="#333"/>
+ <path d="m70 5 10 10h60l10-10-15-5h-50z" fill="#4d4d4d"/>
+ <path d="m10 265v86.667l13.333 13.333h173.33l13.333-13.333v-86.667z" fill="#1a1a1a"/>
+ <path d="m10 265v-225l50-20 5 5 45 10 45-10 5-5 50 20v225z"/>
+ <rect x="10" y="44" width="200" height="221" fill="#1a1a1a" fill-rule="evenodd"/>
+ <rect x="20" y="65" width="180" height="181" fill="#fff" fill-rule="evenodd"/>
+ <path d="m10 45v-5l50-20 5 5 45 10 45-10 5-5 50 20v5z"/>
+ <circle cx="70" cy="37.5" r="2.5" fill="#fff" fill-rule="evenodd"/>
+</svg>

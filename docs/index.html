@@ -4,21 +4,58 @@
 <meta charset="utf-8">
 <title>TitanPocket tools</title>
 <script src="./tp-keyboard.js"></script>
+<script src="./tp-screen.js"></script>
+<script src="./titan-pocket.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
-	document.addEventListener( 'backbutton', () => {}, false);
-	const input = document.getElementById( 'input' );
-	window.addEventListener( 'keydown', ( event ) =>
+	( ( input ) =>
 	{
-		input.value = `${ event.key } ${ event.keyCode }(${ event.code }) [${ event.shiftKey ? 'S' : '' }${ event.ctrlKey ? 'C' : '' }${ event.altKey ? 'A' : '' }${ event.metaKey ? 'M' : '' }]`;
-	} );
+		window.addEventListener( 'keydown', ( event ) =>
+		{
+			input.value = `${ event.key } ${ event.keyCode }(${ event.code }) [${ event.shiftKey ? 'S' : '' }${ event.ctrlKey ? 'C' : '' }${ event.altKey ? 'A' : '' }${ event.metaKey ? 'M' : '' }]`;
+			keyboard.unlight();
+			keyboard.light( event.code );
+		} );
+	} )( document.getElementById( 'input' ) );
 
-	const kinput = document.getElementById( 'kinput' );
-	document.getElementById( 'keyboard' ).addEventListener( 'push', ( event ) =>
+	( ( keyboard ) =>
 	{
-		kinput.value = `${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' }`;
-	} );
+		const kinput = document.getElementById( 'kinput' );
+		keyboard.addEventListener( 'push', ( event ) =>
+		{
+			kinput.value = `${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' }`;
+			keyboard.unlight();
+			keyboard.light( event.detail.button );
+		} );
+	} )( document.getElementById( 'keyboard' ) );
+
+	( ( screen ) =>
+	{
+		const change = ( ( context ) =>
+		{
+			return ( color ) =>
+			{
+				context.fillStyle = color;
+				context.fillRect( 0, 0, screen.screenWidth, screen.screenHeight );
+			};
+		} )( screen.context2D );
+		change( 'lightgray' );
+
+		const changeScreen = ( event ) =>
+		{
+			switch ( event.detail.button )
+			{
+				case 'volup': return change( '#381212' );
+				case 'voldown': return change( '#121e38' );
+				case 'ptt': return change( '#1b3812' );
+				case 'power': return change( '#000' );
+				default: return change( 'lightgray' );
+			}
+		};
+		document.getElementById( 'titanpocket' ).addEventListener( 'push', changeScreen );
+		document.getElementById( 'kb' ).addEventListener( 'push', changeScreen );
+	} )( document.getElementById( 'screen' ) );
 } );
 </script>
 </head>
@@ -29,6 +66,13 @@ window.addEventListener('DOMContentLoaded', () =>
 	</div>
 	<div>
 		<input id="input" readonly style="font-size:3rem;">
+	</div>
+	<div style="display:flex;gap:1rem;margin:0.5rem 0;">
+		<titan-pocket style="width:100%;"></titan-pocket>
+		<titan-pocket id="titanpocket" style="width:100%;--led:white">
+			<tp-screen id="screen"></tp-screen>
+			<tp-keyboard id="kb"></tp-keyboard>
+		</titan-pocket>
 	</div>
 </body>
 </html>

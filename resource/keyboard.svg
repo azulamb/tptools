@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150" height="75" version="1.1" viewBox="0 0 150 75" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <path d="m0 0v65l10 10h130l10-10v-65z" fill="#333"/>
+  <path d="m137 57h13v8l-10 10h-5v-2z" fill="#4d4d4d"/>
+  <path d="m135 55h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m137 57-2-2v18z" fill="#666"/>
+  <path d="m145.5 61.5v3h-4v-1.1934l-5.082 1.6934 5.082 1.6934v-1.1934h5v-4z" fill="#f2f2f2"/>
+  <path d="m122 57h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m120 55h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m122 57-2-2v18z" fill="#666"/>
+  <text x="127" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">M</text>
+  <text x="132" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">?</text>
+  <path d="m107 57h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m105 55h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m107 57-2-2v18z" fill="#666"/>
+  <text x="112" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">N</text>
+  <text x="117" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">,</text>
+  <path d="m92 57h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m90 55h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m92 57-2-2v18z" fill="#666"/>
+  <text x="97" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">B</text>
+  <text x="102" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">.</text>
+  <path d="m60 55h30l-2 18h-26z" fill="#808080"/>
+  <path d="m60 55v20l2-2-2-18zm30 0-2 18 2 2v-20z" fill="#666"/>
+  <path d="m62 73h26l2 2h-30z" fill="#4d4d4d"/>
+  <path d="m67.5 62.5v1h15v-1z" fill="#f2f2f2"/>
+  <path d="m45 57h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m45 55h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m60 55-2 2 2 16z" fill="#666"/>
+  <text x="53" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">V</text>
+  <text x="48" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">9</text>
+  <path d="m30 57h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m30 55h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m45 55-2 2 2 16z" fill="#666"/>
+  <text x="38" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">C</text>
+  <text x="33" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">8</text>
+  <path d="m15 57h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m15 55h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m30 55-2 2 2 16z" fill="#666"/>
+  <text x="23" y="72" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">X</text>
+  <text x="18" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">7</text>
+  <path d="m0 57h13l2 16v2h-5l-10-10z" fill="#4d4d4d"/>
+  <path d="m0 55h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m15 55-2 2 2 16z" fill="#666"/>
+  <text x="8" y="70" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">Z</text>
+  <text x="3" y="62" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">!</text>
+  <path d="m137 37h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m135 35h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m137 37-2-2v18z" fill="#666"/>
+  <path d="m139.79 43.5-3.5 3.5 3.5 3.5h8.707v-7h-8.707zm0.41406 1h0.58594l-0.5 0.5 2 2-2 2 0.5 0.5h-0.58594l-2.5-2.5 2.5-2.5zm1 0h3.5859l-1.793 1.793-1.793-1.793zm4 0h2.293v5h-2.293l0.5-0.5-2-2 2-2-0.5-0.5zm-2.207 3.207 1.793 1.793h-3.5859l1.793-1.793z" fill="#f2f2f2"/>
+  <path d="m122 37h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m120 35h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m122 37-2-2v18z" fill="#666"/>
+  <text x="127" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">L</text>
+  <text x="132" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">'</text>
+  <path d="m107 37h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m105 35h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m107 37-2-2v18z" fill="#666"/>
+  <text x="112" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">K</text>
+  <text x="117" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">"</text>
+  <path d="m92 37h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m90 35h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m92 37-2-2v18z" fill="#666"/>
+  <text x="97" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">J</text>
+  <text x="102" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">+</text>
+  <path d="m77 37h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m75 35h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m77 37-2-2v18z" fill="#666"/>
+  <text x="82" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">H</text>
+  <text x="87" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">#</text>
+  <path d="m60 37h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m60 35h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m75 35-2 2 2 16z" fill="#666"/>
+  <text x="68" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">G</text>
+  <text x="63" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">*</text>
+  <path d="m45 37h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m45 35h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m60 35-2 2 2 16z" fill="#666"/>
+  <text x="53" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">F</text>
+  <text x="48" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">6</text>
+  <path d="m30 37h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m30 35h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m45 35-2 2 2 16z" fill="#666"/>
+  <text x="38" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">D</text>
+  <text x="33" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">5</text>
+  <path d="m15 37h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m15 35h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m30 35-2 2 2 16z" fill="#666"/>
+  <text x="23" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">S</text>
+  <text x="18" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">4</text>
+  <path d="m0 37h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m0 35h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m15 35-2 2 2 16z" fill="#666"/>
+  <text x="8" y="52" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">A</text>
+  <text x="3" y="42" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">@</text>
+  <path d="m137 17h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m135 15h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m137 17-2-2v18z" fill="#666"/>
+  <text x="142" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">P</text>
+  <text x="147" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">:</text>
+  <path d="m122 17h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m120 15h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m122 17-2-2v18z" fill="#666"/>
+  <text x="127" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">O</text>
+  <text x="132" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">/</text>
+  <path d="m107 17h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m105 15h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m107 17-2-2v18z" fill="#666"/>
+  <text x="112" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">I</text>
+  <text x="117" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">_</text>
+  <path d="m92 17h13v18h-15v-2z" fill="#4d4d4d"/>
+  <path d="m90 15h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m92 17-2-2v18z" fill="#666"/>
+  <text x="97" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">U</text>
+  <text x="102" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">-</text>
+  <path d="m77 17 13-2v20h-15v-2z" fill="#4d4d4d"/>
+  <path d="m75 15h15v2h-13z" fill="#b3b3b3"/>
+  <path d="m77 17-2-2v18z" fill="#666"/>
+  <text x="82" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">Y</text>
+  <text x="87" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">)</text>
+  <path d="m60 17h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m60 15h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m75 15-2 2 2 16z" fill="#666"/>
+  <text x="68" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">T</text>
+  <text x="63" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">(</text>
+  <path d="m45 17h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m45 15h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m60 15-2 2 2 16z" fill="#666"/>
+  <text x="53" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">R</text>
+  <text x="48" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">3</text>
+  <path d="m30 17h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m30 15h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m45 15-2 2 2 16z" fill="#666"/>
+  <text x="38" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">E</text>
+  <text x="33" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">2</text>
+  <path d="m15 17h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m15 15h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m30 15-2 2 2 16z" fill="#666"/>
+  <text x="23" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">W</text>
+  <text x="18" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">1</text>
+  <path d="m0 17h13l2 16v2h-15z" fill="#4d4d4d"/>
+  <path d="m0 15h15l-2 2h-13z" fill="#b3b3b3"/>
+  <path d="m15 15-2 2 2 16z" fill="#666"/>
+  <text x="8" y="32" fill="#f2f2f2" font-family="Bahnschrift" font-size="12px" text-align="center" text-anchor="middle" xml:space="preserve">Q</text>
+  <text x="3" y="22" fill="#f2f2f2" font-family="Bahnschrift" font-size="7px" text-align="center" text-anchor="middle" xml:space="preserve">0</text>
+  <path d="m132 2h18v13h-20v-2z" fill="#4d4d4d"/>
+  <path d="m130 0h20v2h-18z" fill="#b3b3b3"/>
+  <path d="m132 2-2-2v13z" fill="#666"/>
+  <text x="140" y="11" fill="#f2f2f2" font-family="Bahnschrift" font-size="8px" text-align="center" text-anchor="middle">alt</text>
+  <path d="m112 2h18v13h-20v-2z" fill="#4d4d4d"/>
+  <path d="m110 0h20v2h-18z" fill="#b3b3b3"/>
+  <path d="m112 2-2-2v13z" fill="#666"/>
+  <text x="120" y="11" fill="#f2f2f2" font-family="Bahnschrift" font-size="8px" text-align="center" text-anchor="middle">fn</text>
+  <path d="m92 2h18v13h-20v-2z" fill="#4d4d4d"/>
+  <path d="m90 0h20v2h-18z" fill="#b3b3b3"/>
+  <path d="m92 2-2-2v13z" fill="#666"/>
+  <path d="m96.5 4.5v7h7v-7zm1 1h5v5h-5z" fill="#f2f2f2"/>
+  <path d="m61 1h28v13h-28z" fill="#4d4d4d"/>
+  <path d="m60 0h30l-1 1h-28v13l-1 1z" fill="#b3b3b3"/>
+  <path d="m90 0-1 1v13h-28l-1 1h30z" fill="#666"/>
+  <path d="m40 2h18l2 11v2h-20z" fill="#4d4d4d"/>
+  <path d="m40 0h20l-2 2h-18z" fill="#b3b3b3"/>
+  <path d="m60 0-2 2 2 11z" fill="#666"/>
+  <path d="m52.5 4.1914-7.6172 3.8086 7.6172 3.8086zm-1 1.6172v4.3828l-4.3828-2.1914z" fill="#f2f2f2"/>
+  <path d="m0 2h18l2 11v2h-20z" fill="#4d4d4d"/>
+  <path d="m0 0h20l-2 2h-18z" fill="#b3b3b3"/>
+  <path d="m20 0-2 2 2 11z" fill="#666"/>
+  <path d="m10 2.293-5.207 5.207h2.707v3h5v-3h2.707zm0 1.4141 2.793 2.793h-1.293v3h-3v-3h-1.293zm-2.5 7.793v1h5v-1z" fill="#f2f2f2"/>
+ </g>
+</svg>

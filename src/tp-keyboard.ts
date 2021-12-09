@@ -1,15 +1,22 @@
 interface TitanPocketKeyboardElement extends HTMLElement
 {
 	addEventListener( type: 'push', listener: ( event: KeyboardPushEvent ) => any, options?: boolean | AddEventListenerOptions ): void;
+	light( key: string | number ): TitanPocketKeyboardElement;
+	unlight( key?: string | number ): TitanPocketKeyboardElement;
+	showKey( key?: string | number ): TitanPocketKeyboardElement;
+	hideKey( key?: string | number ): TitanPocketKeyboardElement;
+	disable: boolean;
+	hidesub: boolean;
 }
 
-type TITAN_POCKET_KEYS = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'space' | 'backspace' | 'enter' | 'shift' | 'alt' | 'fn' | 'menu' | 'back' | 'symbol';
+type TITAN_POCKET_KEYS = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'space' | 'backspace' | 'enter' | 'shift' | 'alt' | 'fn' | 'menu' | 'back' | 'symbol' | 'finger';
 
 interface KeyData
 {
 	keyCode: number;
 	code: string;
 }
+
 interface KeyboardPushData extends KeyData
 {
 	button: TITAN_POCKET_KEYS;
@@ -27,7 +34,7 @@ interface KeyboardPushEvent extends CustomEvent
 	document.addEventListener( 'DOMContentLoaded', () => { init( script ); } );
 } )( <HTMLScriptElement>document.currentScript, ( script: HTMLScriptElement ) =>
 {
-	const buttons: { name: TITAN_POCKET_KEYS | 'finger', back: string, top: string, side: string, front: string | { main: string, mx: number, my: number, sub?: string, sx?: number, sy?: number } }[] =
+	const buttons: { name: TITAN_POCKET_KEYS, back: string, top: string, side: string, front: string | { main: string, mx: number, my: number, sub?: string, sx?: number, sy?: number } }[] =
 	[
 		{ name: 'enter', back: 'm137 57h13v8l-10 10h-5v-2z', top: 'm135 55h15v2h-13z', side: 'm137 57-2-2v18z', front: 'm145.5 61.5v3h-4v-1.1934l-5.082 1.6934 5.082 1.6934v-1.1934h5v-4z' },
 		{ name: 'm', back: 'm122 57h13v18h-15v-2z', top: 'm120 55h15v2h-13z', side: 'm122 57-2-2v18z', front: { main: 'M', mx: 127, my: 72, sub: '?', sx: 132, sy: 62, } },
@@ -84,6 +91,7 @@ interface KeyboardPushEvent extends CustomEvent
 		menu: { keyCode: -1, code: 'Menu' },
 		back: { keyCode: -1, code: 'Back' },
 		symbol: { keyCode: 0, code: 'ContextMenu' },
+		finger: { keyCode: -1, code: 'Home' },
 	};
 
 	( ( component, tagname = 'tp-keyboard' ) =>
@@ -92,6 +100,8 @@ interface KeyboardPushEvent extends CustomEvent
 		customElements.define( tagname, component );
 	} )( class extends HTMLElement implements TitanPocketKeyboardElement
 	{
+		private keyboard: SVGSVGElement;
+
 		constructor()
 		{
 			super();
@@ -101,7 +111,7 @@ interface KeyboardPushEvent extends CustomEvent
 			const style = document.createElement( 'style' );
 			style.innerHTML =
 			[
-				':host { display: inline-block; width: 300px; }',
+				':host { --highlight: #4275a5; --font: Bahnschrift; display: block; width: 300px; }',
 				':host > div { width: 100%; }',
 				'svg { display: block; width: 100%; height: 100%; }',
 				'svg .button { cursor: pointer; fill: var( --button-back, #4d4d4d ); }',
@@ -109,30 +119,34 @@ interface KeyboardPushEvent extends CustomEvent
 				'svg .top { fill: var( --button-top, #b3b3b3 ); }',
 				'svg .side { fill: var( --button-side, #666 ); }',
 				'svg .front { fill: var( --button-front, #f2f2f2 ); }',
-				'svg text { font-family: Bahnschrift; fill: var( --button-front, #f2f2f2 ); }',
+				'svg text { font-family: var( --font ); fill: var( --button-front, #f2f2f2 ); }',
 				'svg .front, svg text { pointer-events: none; user-select: none; }',
 				'text::after { content: "x"; display: inline; }',
 				'svg text.main { font-size: 12px; }',
 				'svg text.sub { font-size: 7px; }',
 				'svg text.menu { font-size: 8px; }',
-				'svg g.disable .button { pointer-events: none; }',
-				'svg g.disable text, svg g.disable .front { display: none; }',
+				'svg path.highlight { fill: var( --highlight ); }',
+				':host( [ disable ] ) svg g { opacity: 0.5; }',
+				':host( [ disable ] ) svg g .button { pointer-events: none; }',
+				'svg g.hide .button { pointer-events: none; }',
+				'svg g.hide text, svg g.hide .front, :host( [ hidesub ] ) svg g text.sub { display: none; }',
 			].join( '' );
 
 			const back = document.createElementNS( 'http://www.w3.org/2000/svg', 'path' );
 			back.setAttributeNS( null, 'd', 'm0 0v65l10 10h130l10-10v-65z' );
 			back.style.fill = 'var(--back,#333)';
 
-			const svg = document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' );
-			svg.setAttributeNS( null, 'width', '150px' );
-			svg.setAttributeNS( null, 'height', '75px' );
-			svg.setAttributeNS( null, 'viewBox', '0 0 150 75' );
-			svg.appendChild( back );
+			this.keyboard = document.createElementNS( 'http://www.w3.org/2000/svg', 'svg' );
+			this.keyboard.setAttributeNS( null, 'width', '150px' );
+			this.keyboard.setAttributeNS( null, 'height', '75px' );
+			this.keyboard.setAttributeNS( null, 'viewBox', '0 0 150 75' );
+			this.keyboard.appendChild( back );
 
 			buttons.forEach( ( button ) =>
 			{
 				const back = document.createElementNS( 'http://www.w3.org/2000/svg', 'path' );
 				back.setAttributeNS( null, 'd', button.back );
+				back.id = button.name;
 
 				const top = document.createElementNS( 'http://www.w3.org/2000/svg', 'path' );
 				top.setAttributeNS( null, 'd', button.top );
@@ -147,13 +161,7 @@ interface KeyboardPushEvent extends CustomEvent
 				group.appendChild( top );
 				group.appendChild( side );
 
-				svg.appendChild( group );
-
-				if ( !button.front )
-				{
-					back.classList.add( 'finger' );
-					return;
-				}
+				this.keyboard.appendChild( group );
 
 				back.classList.add( 'button' );
 				back.addEventListener( 'click', () => {
@@ -197,10 +205,95 @@ interface KeyboardPushEvent extends CustomEvent
 			} );
 
 			const contents = document.createElement( 'div' );
-			contents.appendChild( svg );
+			contents.appendChild( this.keyboard );
 
 			shadow.appendChild( style );
 			shadow.appendChild( contents );
 		}
+
+		protected searchButtonId( key: string | number )
+		{
+			if ( keymap[ <TITAN_POCKET_KEYS>key ] ) { return <string>key; }
+			for ( const k in keymap )
+			{
+				const data = keymap[ <TITAN_POCKET_KEYS>k ];
+				if ( data.keyCode === key ) { return k; }
+				if ( data.code === key ) { return k; }
+			}
+
+			return '';
+		}
+
+		protected searchButton( key: string | number ): SVGPathElement | null
+		{
+			const id = this.searchButtonId( key );
+			if ( !id ) { return null; }
+			return <SVGPathElement>this.keyboard.getElementById( id );
+		}
+
+		public light( key: string | number )
+		{
+			const button = this.searchButton( key );
+			if ( button ) { button.classList.add( 'highlight' ); }
+
+			return this;
+		}
+
+		public unlight( key?: string | number )
+		{
+			if ( key !== undefined )
+			{
+				const button = this.searchButton( key );
+				if ( button ) { button.classList.remove( 'highlight' ); }
+			} else
+			{
+				this.keyboard.querySelectorAll( 'path.highlight' ).forEach( ( button ) =>
+				{
+					button.classList.remove( 'highlight' );
+				} );
+			}
+
+			return this;
+		}
+
+		public showKey( key?: string | number ): TitanPocketKeyboardElement
+		{
+			if ( key !== undefined )
+			{
+				const button = this.searchButton( key );
+				if ( button ) { (<Element>button.parentElement).classList.remove( 'hide' ); }
+			} else
+			{
+				this.keyboard.querySelectorAll( '.hide' ).forEach( ( button ) =>
+				{
+					(<Element>button.parentElement).classList.remove( 'hide' );
+				} );
+			}
+
+			return this;
+		}
+
+		public hideKey( key?: string | number ): TitanPocketKeyboardElement
+		{
+			if ( key !== undefined )
+			{
+				const button = this.searchButton( key );
+				if ( button ) { (<Element>button.parentElement).classList.add( 'hide' ); }
+			} else
+			{
+				this.keyboard.querySelectorAll( '.button' ).forEach( ( button ) =>
+				{
+					(<Element>button.parentElement).classList.add( 'hide' );
+				} );
+			}
+
+			return this;
+		}
+
+		get disable() { return this.hasAttribute( 'disable' ); }
+		set disable( value ) { if ( value ) { this.setAttribute( 'disable', '' ); } else { this.removeAttribute( 'disable' ); } }
+
+		get hidesub() { return this.hasAttribute( 'hidesub' ); }
+		set hidesub( value ) { if ( value ) { this.setAttribute( 'hidesub', '' ); } else { this.removeAttribute( 'hidesub' ); } }
 	}, script.dataset.tagname );
 } );

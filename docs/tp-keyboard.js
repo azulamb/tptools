@@ -58,6 +58,7 @@
         menu: { keyCode: -1, code: 'Menu' },
         back: { keyCode: -1, code: 'Back' },
         symbol: { keyCode: 0, code: 'ContextMenu' },
+        finger: { keyCode: -1, code: 'Home' },
     };
     ((component, tagname = 'tp-keyboard') => {
         if (customElements.get(tagname)) {
@@ -71,7 +72,7 @@
             const style = document.createElement('style');
             style.innerHTML =
                 [
-                    ':host { display: inline-block; width: 300px; }',
+                    ':host { --highlight: #4275a5; --font: Bahnschrift; display: block; width: 300px; }',
                     ':host > div { width: 100%; }',
                     'svg { display: block; width: 100%; height: 100%; }',
                     'svg .button { cursor: pointer; fill: var( --button-back, #4d4d4d ); }',
@@ -79,26 +80,30 @@
                     'svg .top { fill: var( --button-top, #b3b3b3 ); }',
                     'svg .side { fill: var( --button-side, #666 ); }',
                     'svg .front { fill: var( --button-front, #f2f2f2 ); }',
-                    'svg text { font-family: Bahnschrift; fill: var( --button-front, #f2f2f2 ); }',
+                    'svg text { font-family: var( --font ); fill: var( --button-front, #f2f2f2 ); }',
                     'svg .front, svg text { pointer-events: none; user-select: none; }',
                     'text::after { content: "x"; display: inline; }',
                     'svg text.main { font-size: 12px; }',
                     'svg text.sub { font-size: 7px; }',
                     'svg text.menu { font-size: 8px; }',
-                    'svg g.disable .button { pointer-events: none; }',
-                    'svg g.disable text, svg g.disable .front { display: none; }',
+                    'svg path.highlight { fill: var( --highlight ); }',
+                    ':host( [ disable ] ) svg g { opacity: 0.5; }',
+                    ':host( [ disable ] ) svg g .button { pointer-events: none; }',
+                    'svg g.hide .button { pointer-events: none; }',
+                    'svg g.hide text, svg g.hide .front, :host( [ hidesub ] ) svg g text.sub { display: none; }',
                 ].join('');
             const back = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             back.setAttributeNS(null, 'd', 'm0 0v65l10 10h130l10-10v-65z');
             back.style.fill = 'var(--back,#333)';
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttributeNS(null, 'width', '150px');
-            svg.setAttributeNS(null, 'height', '75px');
-            svg.setAttributeNS(null, 'viewBox', '0 0 150 75');
-            svg.appendChild(back);
+            this.keyboard = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            this.keyboard.setAttributeNS(null, 'width', '150px');
+            this.keyboard.setAttributeNS(null, 'height', '75px');
+            this.keyboard.setAttributeNS(null, 'viewBox', '0 0 150 75');
+            this.keyboard.appendChild(back);
             buttons.forEach((button) => {
                 const back = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 back.setAttributeNS(null, 'd', button.back);
+                back.id = button.name;
                 const top = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 top.setAttributeNS(null, 'd', button.top);
                 top.classList.add('top');
@@ -109,11 +114,7 @@
                 group.appendChild(back);
                 group.appendChild(top);
                 group.appendChild(side);
-                svg.appendChild(group);
-                if (!button.front) {
-                    back.classList.add('finger');
-                    return;
-                }
+                this.keyboard.appendChild(group);
                 back.classList.add('button');
                 back.addEventListener('click', () => {
                     const name = button.name;
@@ -149,9 +150,94 @@
                 }
             });
             const contents = document.createElement('div');
-            contents.appendChild(svg);
+            contents.appendChild(this.keyboard);
             shadow.appendChild(style);
             shadow.appendChild(contents);
         }
+        searchButtonId(key) {
+            if (keymap[key]) {
+                return key;
+            }
+            for (const k in keymap) {
+                const data = keymap[k];
+                if (data.keyCode === key) {
+                    return k;
+                }
+                if (data.code === key) {
+                    return k;
+                }
+            }
+            return '';
+        }
+        searchButton(key) {
+            const id = this.searchButtonId(key);
+            if (!id) {
+                return null;
+            }
+            return this.keyboard.getElementById(id);
+        }
+        light(key) {
+            const button = this.searchButton(key);
+            if (button) {
+                button.classList.add('highlight');
+            }
+            return this;
+        }
+        unlight(key) {
+            if (key !== undefined) {
+                const button = this.searchButton(key);
+                if (button) {
+                    button.classList.remove('highlight');
+                }
+            }
+            else {
+                this.keyboard.querySelectorAll('path.highlight').forEach((button) => {
+                    button.classList.remove('highlight');
+                });
+            }
+            return this;
+        }
+        showKey(key) {
+            if (key !== undefined) {
+                const button = this.searchButton(key);
+                if (button) {
+                    button.parentElement.classList.remove('hide');
+                }
+            }
+            else {
+                this.keyboard.querySelectorAll('.hide').forEach((button) => {
+                    button.parentElement.classList.remove('hide');
+                });
+            }
+            return this;
+        }
+        hideKey(key) {
+            if (key !== undefined) {
+                const button = this.searchButton(key);
+                if (button) {
+                    button.parentElement.classList.add('hide');
+                }
+            }
+            else {
+                this.keyboard.querySelectorAll('.button').forEach((button) => {
+                    button.parentElement.classList.add('hide');
+                });
+            }
+            return this;
+        }
+        get disable() { return this.hasAttribute('disable'); }
+        set disable(value) { if (value) {
+            this.setAttribute('disable', '');
+        }
+        else {
+            this.removeAttribute('disable');
+        } }
+        get hidesub() { return this.hasAttribute('hidesub'); }
+        set hidesub(value) { if (value) {
+            this.setAttribute('hidesub', '');
+        }
+        else {
+            this.removeAttribute('hidesub');
+        } }
     }, script.dataset.tagname);
 });
