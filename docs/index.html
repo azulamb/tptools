@@ -3,33 +3,13 @@
 <head>
 <meta charset="utf-8">
 <title>TitanPocket tools</title>
+<script src="./site-header.js"></script>
 <script src="./tp-keyboard.js"></script>
 <script src="./tp-screen.js"></script>
 <script src="./titan-pocket.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
-	( ( input ) =>
-	{
-		window.addEventListener( 'keydown', ( event ) =>
-		{
-			input.value = `${ event.key } ${ event.keyCode }(${ event.code }) [${ event.shiftKey ? 'S' : '' }${ event.ctrlKey ? 'C' : '' }${ event.altKey ? 'A' : '' }${ event.metaKey ? 'M' : '' }]`;
-			keyboard.unlight();
-			keyboard.light( event.code );
-		} );
-	} )( document.getElementById( 'input' ) );
-
-	( ( keyboard ) =>
-	{
-		const kinput = document.getElementById( 'kinput' );
-		keyboard.addEventListener( 'push', ( event ) =>
-		{
-			kinput.value = `${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' }`;
-			keyboard.unlight();
-			keyboard.light( event.detail.button );
-		} );
-	} )( document.getElementById( 'keyboard' ) );
-
 	( ( screen ) =>
 	{
 		const change = ( ( context ) =>
@@ -60,13 +40,7 @@ window.addEventListener('DOMContentLoaded', () =>
 </script>
 </head>
 <body>
-	<tp-keyboard id="keyboard" style="width:400px;"></tp-keyboard>
-	<div>
-		<input id="kinput" readonly style="font-size:3rem;">
-	</div>
-	<div>
-		<input id="input" readonly style="font-size:3rem;">
-	</div>
+	<site-header></site-header>
 	<div style="display:flex;gap:1rem;margin:0.5rem 0;">
 		<titan-pocket style="width:100%;"></titan-pocket>
 		<titan-pocket id="titanpocket" style="width:100%;--led:white">
