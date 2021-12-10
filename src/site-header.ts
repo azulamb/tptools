@@ -23,7 +23,7 @@ interface SiteHeaderElement extends HTMLElement
 			const style = document.createElement( 'style' );
 			style.innerHTML =
 			[
-				':host { display: block; background: #d8ddf5; }',
+				':host { display: block; background: #d8ddf5; font-size: 2rem; }',
 				'a { text-decoration: none; display: inline-block; margin: 0.2rem 0.4rem; } }',
 			].join( '' );
 
