@@ -114,7 +114,7 @@ interface KeyboardPushEvent extends CustomEvent
 				':host { --highlight: #4275a5; --font: Bahnschrift; display: block; width: 300px; }',
 				':host > div { width: 100%; }',
 				'svg { display: block; width: 100%; height: 100%; }',
-				'svg .button { cursor: pointer; fill: var( --button-back, #4d4d4d ); outline: none; }',
+				'svg .button { cursor: pointer; fill: var( --button-back, #4d4d4d ); outline: none; -webkit-tap-highlight-color: transparent; }',
 				'svg .finger { fill: var( --button-finger, #4d4d4d ); }',
 				'svg .top { fill: var( --button-top, #b3b3b3 ); }',
 				'svg .side { fill: var( --button-side, #666 ); }',
