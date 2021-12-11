@@ -14,10 +14,13 @@ window.addEventListener('DOMContentLoaded', () =>
 	{
 		const change = ( ( context ) =>
 		{
+			context.font = '40px monospace';
 			return ( color ) =>
 			{
 				context.fillStyle = color;
 				context.fillRect( 0, 0, screen.screenWidth, screen.screenHeight );
+				context.fillStyle = '#fff';
+				context.fillText( `Screen: ${ screen.screenWidth } x ${ screen.screenHeight }`, 10, 50 );
 			};
 		} )( screen.context2D );
 		change( 'lightgray' );
