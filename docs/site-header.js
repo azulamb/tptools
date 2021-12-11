@@ -21,9 +21,10 @@
                 ].join('');
             const contents = document.createElement('div');
             [
-                { 'name': 'Top', url: './' },
-                { 'name': 'Keyboard', url: './keyboard.html' },
-                { 'name': 'Scroll', url: './scroll.html' },
+                { name: 'GtiHub', url: 'https://github.com/Azulamb/tptools' },
+                { name: 'Top', url: './' },
+                { name: 'Keyboard', url: './keyboard.html' },
+                { name: 'Scroll', url: './scroll.html' },
             ].forEach((item) => {
                 const a = document.createElement('a');
                 a.textContent = item.name;
