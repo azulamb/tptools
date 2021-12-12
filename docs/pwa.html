@@ -10,6 +10,7 @@
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
+	document.getElementById( 'pf' ).textContent = window.matchMedia('(display-mode: fullscreen)').matches ? 'PWA' : 'Browser';
 	document.getElementById( 'ws' ).textContent = `${ window.innerWidth } x ${ window.innerHeight }`;
 } );
 </script>
@@ -19,6 +20,8 @@ window.addEventListener('DOMContentLoaded', () =>
 <body>
 	<site-header></site-header>
 	<dl>
+		<dt>Is PWA(fullscreen)</dt>
+		<dd id="pf"></dd>
 		<dt>WIndow size</dt>
 		<dd id="ws"></dd>
 	</dl>
