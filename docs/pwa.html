@@ -4,9 +4,9 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <meta charset="utf-8">
 <title>TitanPocket tools</title>
-<meta name="viewport" content="width=716,user-scalable=no" />
+<!--<meta name="viewport" content="width=716,user-scalable=no" />-->
 <script src="./site-header.js"></script>
-<script src="./tplib.js"></script>
+<script src="./tplib.js?1"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', () =>
 	document.getElementById( 'ws' ).textContent = `${ window.innerWidth } x ${ window.innerHeight }`;
 	document.getElementById( 'reload' ).addEventListener( 'click', () => { location.reload( true ); } );
 } );
+TitanPocket.enableFullscreenViewport();
 </script>
 <style>
 body { overflow: hidden; }
