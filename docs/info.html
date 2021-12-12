@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>TitanPocket tools</title>
+<script src="./site-header.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () =>
+{
+	document.getElementById( 'ua' ).textContent = navigator.userAgent;
+	document.getElementById( 'uad' ).textContent = navigator.userAgentData ? JSON.stringify( navigator.userAgentData.toJSON() ) : 'Not supported';
+	document.getElementById( 'ss' ).textContent = `${ window.parent.screen.width } x ${ window.parent.screen.height }`;
+	document.getElementById( 'ws' ).textContent = `${ window.innerWidth } x ${ window.innerHeight }`;
+} );
+</script>
+<style>
+</style>
+</head>
+<body>
+	<site-header></site-header>
+	<dl>
+		<dt>UserAgent</dt>
+		<dd id="ua"></dd>
+		<dt>UserAgentData</dt>
+		<dd id="uad"></dd>
+		<dt>Screen size</dt>
+		<dd id="ss"></dd>
+		<dt>WIndow size</dt>
+		<dd id="ws"></dd>
+	</dl>
+</body>
+</html>

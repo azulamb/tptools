@@ -33,6 +33,7 @@ interface SiteHeaderElement extends HTMLElement
 				{ name: 'Top', url: './' },
 				{ name: 'Keyboard', url: './keyboard.html' },
 				{ name: 'Scroll', url: './scroll.html' },
+				{ name: 'Info', url: './info.html' },
 			].forEach( ( item ) =>
 			{
 				const a = document.createElement( 'a' );
