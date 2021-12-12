@@ -17,8 +17,9 @@ window.addEventListener('DOMContentLoaded', () =>
 </script>
 <style>
 body { overflow: hidden; }
-div.blocks { display: flex; gap: 1px; background: black; }
+div.blocks { display: flex; justify-content: center; gap: 1px; background: black; }
 div.blocks > button { display: block; background: white; box-sizing: border-box; width: var( --size ); height: var( --size ); }
+div.blocks.s9 > button { --size: 74px; } div.blocks.s9 { gap: 5px; }
 div.blocks.s11 > button { --size: calc( 5 * 13px ); }
 div.blocks.s13 > button { --size: calc( 5 * 11px ); }
 </style>
@@ -34,6 +35,17 @@ div.blocks.s13 > button { --size: calc( 5 * 11px ); }
 	<button id="reload">Reload</button>
 
 	<div style="position:absolute;left:0;width:716px;">
+		<div class="blocks s9">
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+		</div>
 		<div class="blocks s11">
 			<button></button>
 			<button></button>
