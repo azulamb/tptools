@@ -23,9 +23,8 @@ window.addEventListener('DOMContentLoaded', () =>
 		const kinput = document.getElementById( 'kinput' );
 		keyboard.addEventListener( 'push', ( event ) =>
 		{
-			kinput.value = `${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' }`;
-			keyboard.unlight();
-			keyboard.light( event.detail.button );
+			kinput.value = `${ event.detail.key } ${ event.detail.keyCode }(${ event.detail.code })${ event.detail.usable ? '' : ' Unusable' } [${ event.detail.shiftKey ? 'S' : '' }${ event.detail.altKey ? 'A' : '' }]`;
+			keyboard.push( event.detail.button );
 		} );
 	} )( document.getElementById( 'keyboard' ) );
 } );
@@ -39,7 +38,7 @@ input { width: 100%; font-size:3rem; box-sizing: border-box; outline: none; }
 	<div style="width:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:3rem 1fr;">
 		<input id="kinput" readonly>
 		<input id="input" readonly>
-		<tp-keyboard id="keyboard" style="width:100%;grid-column:1 / 3;"></tp-keyboard>
+		<tp-keyboard id="keyboard" style="width:100%;grid-column:1 / 3;" shift alt></tp-keyboard>
 	</div>
 </body>
 </html>

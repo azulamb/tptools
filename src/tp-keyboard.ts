@@ -1,12 +1,74 @@
 interface TitanPocketKeyboardElement extends HTMLElement
 {
 	addEventListener( type: 'push', listener: ( event: KeyboardPushEvent ) => any, options?: boolean | AddEventListenerOptions ): void;
+	/**
+	 * Push button.
+	 * 
+	 * @param key key( 'a', 'shift', ... ) or code( 65, 16, ... )
+	 */
+	push( key: string | number ): TitanPocketKeyboardElement;
+	/**
+	 * Light button.
+	 * 
+	 * @param key key( 'a', 'shift', ... ) or code( 65, 16, ... )
+	 */
 	light( key: string | number ): TitanPocketKeyboardElement;
-	unlight( key?: string | number ): TitanPocketKeyboardElement;
-	showKey( key?: string | number ): TitanPocketKeyboardElement;
-	hideKey( key?: string | number ): TitanPocketKeyboardElement;
+	/**
+	 * Unlight button.
+	 * 
+	 * @param key key( 'a', 'shift', ... ) or code( 65, 16, ... )
+	 */
+	 unlight( key?: string | number ): TitanPocketKeyboardElement;
+	/**
+	 * Show button.
+	 * 
+	 * @param key key( 'a', 'shift', ... ) or code( 65, 16, ... )
+	 */
+	 showButton( key?: string | number ): TitanPocketKeyboardElement;
+	/**
+	 * Hide button.
+	 * 
+	 * @param key key( 'a', 'shift', ... ) or code( 65, 16, ... )
+	 */
+	hideButton( key?: string | number ): TitanPocketKeyboardElement;
+	/**
+	 * Disable keyboard.
+	 * Set ture = disable.
+	 * Or
+	 * Exists disable attribute = enable.
+	 */
 	disable: boolean;
-	hidesub: boolean;
+	/**
+	 * Hide alt string.
+	 * Set true = hide.
+	 * Or
+	 * Exists hidealt attribute = enable.
+	 */
+	 hidealt: boolean;
+	/**
+	 * Enable shift on push button.
+	 * Set true = enable.
+	 * Or
+	 * Exists shift attribute = enable.
+	 */
+	shift: boolean;
+	/**
+	 * Enable alt on push button.
+	 * Set true = enable.
+	 * Or
+	 * Exists alt attribute = enable.
+	 */
+	alt: boolean;
+	/**
+	 * Get pushed shift.
+	 * true = Pushed.
+	 */
+	readonly pushedShift: boolean;
+	/**
+	 * Get pushed alt.
+	 * true = Pushed.
+	 */
+	readonly pushedAlt: boolean;
 }
 
 type TITAN_POCKET_KEYS = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'space' | 'backspace' | 'enter' | 'shift' | 'alt' | 'fn' | 'menu' | 'back' | 'symbol' | 'finger';
@@ -20,6 +82,9 @@ interface KeyData
 interface KeyboardPushData extends KeyData
 {
 	button: TITAN_POCKET_KEYS;
+	key: string;
+	shiftKey: boolean;
+	altKey: boolean;
 	usable: boolean;
 }
 
@@ -36,43 +101,89 @@ interface KeyboardPushEvent extends CustomEvent
 {
 	const buttons: { name: TITAN_POCKET_KEYS, back: string, top: string, side: string, front: string | { main: string, mx: number, my: number, sub?: string, sx?: number, sy?: number } }[] =
 	[
-		{ name: 'enter', back: 'm137 57h13v8l-10 10h-5v-2z', top: 'm135 55h15v2h-13z', side: 'm137 57-2-2v18z', front: 'm145.5 61.5v3h-4v-1.1934l-5.082 1.6934 5.082 1.6934v-1.1934h5v-4z' },
-		{ name: 'm', back: 'm122 57h13v18h-15v-2z', top: 'm120 55h15v2h-13z', side: 'm122 57-2-2v18z', front: { main: 'M', mx: 127, my: 72, sub: '?', sx: 132, sy: 62, } },
-		{ name: 'n', back: 'm107 57h13v18h-15v-2z', top: 'm105 55h15v2h-13z', side: 'm107 57-2-2v18z', front: { main: 'N', mx: 112, my: 72, sub: ',', sx: 117, sy: 62 } },
-		{ name: 'b', back: 'm92 57h13v18h-15v-2z', top: 'm90 55h15v2h-13z', side: 'm92 57-2-2v18z', front: { main: 'B', mx: 97, my: 72, sub: '.', sx: 102, sy: 62 } },
-		{ name: 'space', back: 'm60 55h30l-2 18h-26z', top: 'm60 55v20l2-2-2-18zm30 0-2 18 2 2v-20z', side: 'm62 73h26l2 2h-30z', front: 'm67.5 62.5v1h15v-1z' },
-		{ name: 'v', back: 'm45 57h13l2 16v2h-15z', top: 'm45 55h15l-2 2h-13z', side: 'm60 55-2 2 2 16z', front: { main: 'V', mx: 53, my: 72, sub: '9', sx: 48, sy: 62 } },
-		{ name: 'c', back: 'm30 57h13l2 16v2h-15z', top: 'm30 55h15l-2 2h-13z', side: 'm45 55-2 2 2 16z', front: { main: 'C', mx: 38, my: 72, sub: '8', sx: 33, sy:62 } },
-		{ name: 'x', back: 'm15 57h13l2 16v2h-15z', top: 'm15 55h15l-2 2h-13z', side: 'm30 55-2 2 2 16z', front: { main: 'X', mx: 23, my: 72, sub: '7', sx: 18, sy: 62 } },
-		{ name: 'z', back: 'm0 57h13l2 16v2h-5l-10-10z', top: 'm0 55h15l-2 2h-13z', side: 'm15 55-2 2 2 16z', front: { main: 'Z', mx: 8, my: 70, sub: '!', sx: 3, sy: 62 } },
-		{ name: 'backspace', back: 'm137 37h13v18h-15v-2z', top: 'm135 35h15v2h-13z', side: 'm137 37-2-2v18z', front: 'm139.79 43.5-3.5 3.5 3.5 3.5h8.707v-7h-8.707zm0.41406 1h0.58594l-0.5 0.5 2 2-2 2 0.5 0.5h-0.58594l-2.5-2.5 2.5-2.5zm1 0h3.5859l-1.793 1.793-1.793-1.793zm4 0h2.293v5h-2.293l0.5-0.5-2-2 2-2-0.5-0.5zm-2.207 3.207 1.793 1.793h-3.5859l1.793-1.793z' },
-		{ name: 'l', back: 'm122 37h13v18h-15v-2z', top: 'm120 35h15v2h-13z', side: 'm122 37-2-2v18z', front: { main: 'L', mx: 127, my: 52, sub: "'", sx: 132, sy: 42 } },
-		{ name: 'k', back: 'm107 37h13v18h-15v-2z', top: 'm105 35h15v2h-13z', side: 'm107 37-2-2v18z', front: { main: 'K', mx: 112, my: 52, sub: '"', sx: 117, sy:42 } },
-		{ name: 'j', back: 'm92 37h13v18h-15v-2z', top: 'm90 35h15v2h-13z', side: 'm92 37-2-2v18z', front: { main: 'J', mx: 97, my: 52, sub: '+', sx: 102, sy: 42 } },
-		{ name: 'h', back: 'm77 37h13v18h-15v-2z', top: 'm75 35h15v2h-13z', side: 'm77 37-2-2v18z', front: { main: 'H', mx: 82, my: 52, sub: '#', sx: 87, sy:42 } },
-		{ name: 'g', back: 'm60 37h13l2 16v2h-15z', top: 'm60 35h15l-2 2h-13z', side: 'm75 35-2 2 2 16z', front: { main: 'G', mx: 68, my: 52, sub: '*', sx: 63, sy: 42 } },
-		{ name: 'f', back: 'm45 37h13l2 16v2h-15z', top: 'm45 35h15l-2 2h-13z', side: 'm60 35-2 2 2 16z', front: { main: 'F', mx: 53, my: 52, sub: '6', sx: 48, sy: 42 } },
-		{ name: 'd', back: 'm30 37h13l2 16v2h-15z', top: 'm30 35h15l-2 2h-13z', side: 'm45 35-2 2 2 16z', front: { main: 'D', mx: 38, my: 52, sub: '5', sx: 33, sy: 42 } },
-		{ name: 's', back: 'm15 37h13l2 16v2h-15z', top: 'm15 35h15l-2 2h-13z', side: 'm30 35-2 2 2 16z', front: { main: 'S', mx: 23, my: 52, sub: '4', sx: 18, sy: 42 } },
-		{ name: 'a', back: 'm0 37h13l2 16v2h-15z', top: 'm0 35h15l-2 2h-13z', side: 'm15 35-2 2 2 16z', front: { main: 'A', mx: 8, my: 52, sub: '@', sx: 3, sy: 42 } },
-		{ name: 'p', back: 'm137 17h13v18h-15v-2z', top: 'm135 15h15v2h-13z', side: 'm137 17-2-2v18z', front: { main: 'P', mx: 142, my: 32, sub: ':', sx: 147, sy: 22 } },
-		{ name: 'o', back: 'm122 17h13v18h-15v-2z', top: 'm120 15h15v2h-13z', side: 'm122 17-2-2v18z', front: { main: 'O', mx: 127, my: 32, sub: '/', sx: 132, sy: 22 } },
-		{ name: 'i', back: 'm107 17h13v18h-15v-2z', top: 'm105 15h15v2h-13z', side: 'm107 17-2-2v18z', front: { main: 'I', mx: 112, my: 32, sub: '_', sx: 117, sy: 22 } },
-		{ name: 'u', back: 'm92 17h13v18h-15v-2z', top: 'm90 15h15v2h-13z', side: 'm92 17-2-2v18z', front: { main: 'U', mx: 97, my: 32, sub: '-', sx: 102, sy: 22 } },
-		{ name: 'y', back: 'm77 17 13-2v20h-15v-2z', top: 'm75 15h15v2h-13z', side: 'm77 17-2-2v18z', front: { main: 'Y', mx: 82, my:32, sub: ')', sx: 87, sy: 22 } },
-		{ name: 't', back: 'm60 17h13l2 16v2h-15z', top: 'm60 15h15l-2 2h-13z', side: 'm75 15-2 2 2 16z', front: { main: 'T', mx: 68, my: 32, sub: '(', sx: 63, sy: 22 } },
-		{ name: 'r', back: 'm45 17h13l2 16v2h-15z', top: 'm45 15h15l-2 2h-13z', side: 'm60 15-2 2 2 16z', front: { main: 'R', mx: 53, my: 32, sub: '3', sx: 48, sy: 22 } },
-		{ name: 'e', back: 'm30 17h13l2 16v2h-15z', top: 'm30 15h15l-2 2h-13z', side: 'm45 15-2 2 2 16z', front: { main: 'E', mx: 38, my: 32, sub: '2', sx: 33, sy: 22 } },
-		{ name: 'w', back: 'm15 17h13l2 16v2h-15z', top: 'm15 15h15l-2 2h-13z', side: 'm30 15-2 2 2 16z', front: { main: 'W', mx: 23, my: 32, sub: '1', sx: 18, sy: 22 } },
-		{ name: 'q', back: 'm0 17h13l2 16v2h-15z', top: 'm0 15h15l-2 2h-13z', side: 'm15 15-2 2 2 16z', front: { main: 'Q', mx: 8, my: 32, sub: '0', sx: 3, sy: 22 } },
-		{ name: 'alt', back: 'm132 2h18v13h-20v-2z', top: 'm130 0h20v2h-18z', side: 'm132 2-2-2v13z', front: { main: 'alt', mx: 140, my: 11 } },
-		{ name: 'fn', back: 'm112 2h18v13h-20v-2z', top: 'm110 0h20v2h-18z', side: 'm112 2-2-2v13z', front: { main: 'fn', mx: 120, my: 11 } },
-		{ name: 'menu', back: 'm92 2h18v13h-20v-2z', top: 'm90 0h20v2h-18z', side: 'm92 2-2-2v13z', front: 'm96.5 4.5v7h7v-7zm1 1h5v5h-5z' },
-		{ name: 'finger', back: 'm61 1h28v13h-28z', top: 'm60 0h30l-1 1h-28v13l-1 1z', side: 'm90 0-1 1v13h-28l-1 1h30z', front: '' },
-		{ name: 'back', back: 'm40 2h18l2 11v2h-20z', top: 'm40 0h20l-2 2h-18z', side: 'm60 0-2 2 2 11z', front: 'm52.5 4.1914-7.6172 3.8086 7.6172 3.8086zm-1 1.6172v4.3828l-4.3828-2.1914z' },
-		{ name: 'symbol', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
 		{ name: 'shift', back: 'm0 2h18l2 11v2h-20z', top: 'm0 0h20l-2 2h-18z', side: 'm20 0-2 2 2 11z', front: 'm10 2.293-5.207 5.207h2.707v3h5v-3h2.707zm0 1.4141 2.793 2.793h-1.293v3h-3v-3h-1.293zm-2.5 7.793v1h5v-1z' },
+		{ name: 'symbol', back: 'm20 2h18l2 11v2h-20z', top: 'm20 0h20l-2 2h-18z', side: 'm40 0-2 2 2 11z', front: { main: 'sym', mx: 30, my: 10 } },
+		{ name: 'back', back: 'm40 2h18l2 11v2h-20z', top: 'm40 0h20l-2 2h-18z', side: 'm60 0-2 2 2 11z', front: 'm52.5 4.1914-7.6172 3.8086 7.6172 3.8086zm-1 1.6172v4.3828l-4.3828-2.1914z' },
+		{ name: 'finger', back: 'm61 1h28v13h-28z', top: 'm60 0h30l-1 1h-28v13l-1 1z', side: 'm90 0-1 1v13h-28l-1 1h30z', front: '' },
+		{ name: 'menu', back: 'm92 2h18v13h-20v-2z', top: 'm90 0h20v2h-18z', side: 'm92 2-2-2v13z', front: 'm96.5 4.5v7h7v-7zm1 1h5v5h-5z' },
+		{ name: 'fn', back: 'm112 2h18v13h-20v-2z', top: 'm110 0h20v2h-18z', side: 'm112 2-2-2v13z', front: { main: 'fn', mx: 120, my: 11 } },
+		{ name: 'alt', back: 'm132 2h18v13h-20v-2z', top: 'm130 0h20v2h-18z', side: 'm132 2-2-2v13z', front: { main: 'alt', mx: 140, my: 11 } },
+
+		{ name: 'q', back: 'm0 17h13l2 16v2h-15z', top: 'm0 15h15l-2 2h-13z', side: 'm15 15-2 2 2 16z', front: { main: 'Q', mx: 8, my: 32, sub: '0', sx: 3, sy: 22 } },
+		{ name: 'w', back: 'm15 17h13l2 16v2h-15z', top: 'm15 15h15l-2 2h-13z', side: 'm30 15-2 2 2 16z', front: { main: 'W', mx: 23, my: 32, sub: '1', sx: 18, sy: 22 } },
+		{ name: 'e', back: 'm30 17h13l2 16v2h-15z', top: 'm30 15h15l-2 2h-13z', side: 'm45 15-2 2 2 16z', front: { main: 'E', mx: 38, my: 32, sub: '2', sx: 33, sy: 22 } },
+		{ name: 'r', back: 'm45 17h13l2 16v2h-15z', top: 'm45 15h15l-2 2h-13z', side: 'm60 15-2 2 2 16z', front: { main: 'R', mx: 53, my: 32, sub: '3', sx: 48, sy: 22 } },
+		{ name: 't', back: 'm60 17h13l2 16v2h-15z', top: 'm60 15h15l-2 2h-13z', side: 'm75 15-2 2 2 16z', front: { main: 'T', mx: 68, my: 32, sub: '(', sx: 63, sy: 22 } },
+		{ name: 'y', back: 'm77 17 13-2v20h-15v-2z', top: 'm75 15h15v2h-13z', side: 'm77 17-2-2v18z', front: { main: 'Y', mx: 82, my:32, sub: ')', sx: 87, sy: 22 } },
+		{ name: 'u', back: 'm92 17h13v18h-15v-2z', top: 'm90 15h15v2h-13z', side: 'm92 17-2-2v18z', front: { main: 'U', mx: 97, my: 32, sub: '-', sx: 102, sy: 22 } },
+		{ name: 'i', back: 'm107 17h13v18h-15v-2z', top: 'm105 15h15v2h-13z', side: 'm107 17-2-2v18z', front: { main: 'I', mx: 112, my: 32, sub: '_', sx: 117, sy: 22 } },
+		{ name: 'o', back: 'm122 17h13v18h-15v-2z', top: 'm120 15h15v2h-13z', side: 'm122 17-2-2v18z', front: { main: 'O', mx: 127, my: 32, sub: '/', sx: 132, sy: 22 } },
+		{ name: 'p', back: 'm137 17h13v18h-15v-2z', top: 'm135 15h15v2h-13z', side: 'm137 17-2-2v18z', front: { main: 'P', mx: 142, my: 32, sub: ':', sx: 147, sy: 22 } },
+
+		{ name: 'a', back: 'm0 37h13l2 16v2h-15z', top: 'm0 35h15l-2 2h-13z', side: 'm15 35-2 2 2 16z', front: { main: 'A', mx: 8, my: 52, sub: '@', sx: 3, sy: 42 } },
+		{ name: 's', back: 'm15 37h13l2 16v2h-15z', top: 'm15 35h15l-2 2h-13z', side: 'm30 35-2 2 2 16z', front: { main: 'S', mx: 23, my: 52, sub: '4', sx: 18, sy: 42 } },
+		{ name: 'd', back: 'm30 37h13l2 16v2h-15z', top: 'm30 35h15l-2 2h-13z', side: 'm45 35-2 2 2 16z', front: { main: 'D', mx: 38, my: 52, sub: '5', sx: 33, sy: 42 } },
+		{ name: 'f', back: 'm45 37h13l2 16v2h-15z', top: 'm45 35h15l-2 2h-13z', side: 'm60 35-2 2 2 16z', front: { main: 'F', mx: 53, my: 52, sub: '6', sx: 48, sy: 42 } },
+		{ name: 'g', back: 'm60 37h13l2 16v2h-15z', top: 'm60 35h15l-2 2h-13z', side: 'm75 35-2 2 2 16z', front: { main: 'G', mx: 68, my: 52, sub: '*', sx: 63, sy: 42 } },
+		{ name: 'h', back: 'm77 37h13v18h-15v-2z', top: 'm75 35h15v2h-13z', side: 'm77 37-2-2v18z', front: { main: 'H', mx: 82, my: 52, sub: '#', sx: 87, sy:42 } },
+		{ name: 'j', back: 'm92 37h13v18h-15v-2z', top: 'm90 35h15v2h-13z', side: 'm92 37-2-2v18z', front: { main: 'J', mx: 97, my: 52, sub: '+', sx: 102, sy: 42 } },
+		{ name: 'k', back: 'm107 37h13v18h-15v-2z', top: 'm105 35h15v2h-13z', side: 'm107 37-2-2v18z', front: { main: 'K', mx: 112, my: 52, sub: '"', sx: 117, sy:42 } },
+		{ name: 'l', back: 'm122 37h13v18h-15v-2z', top: 'm120 35h15v2h-13z', side: 'm122 37-2-2v18z', front: { main: 'L', mx: 127, my: 52, sub: "'", sx: 132, sy: 42 } },
+		{ name: 'backspace', back: 'm137 37h13v18h-15v-2z', top: 'm135 35h15v2h-13z', side: 'm137 37-2-2v18z', front: 'm139.79 43.5-3.5 3.5 3.5 3.5h8.707v-7h-8.707zm0.41406 1h0.58594l-0.5 0.5 2 2-2 2 0.5 0.5h-0.58594l-2.5-2.5 2.5-2.5zm1 0h3.5859l-1.793 1.793-1.793-1.793zm4 0h2.293v5h-2.293l0.5-0.5-2-2 2-2-0.5-0.5zm-2.207 3.207 1.793 1.793h-3.5859l1.793-1.793z' },
+
+		{ name: 'z', back: 'm0 57h13l2 16v2h-5l-10-10z', top: 'm0 55h15l-2 2h-13z', side: 'm15 55-2 2 2 16z', front: { main: 'Z', mx: 8, my: 70, sub: '!', sx: 3, sy: 62 } },
+		{ name: 'x', back: 'm15 57h13l2 16v2h-15z', top: 'm15 55h15l-2 2h-13z', side: 'm30 55-2 2 2 16z', front: { main: 'X', mx: 23, my: 72, sub: '7', sx: 18, sy: 62 } },
+		{ name: 'c', back: 'm30 57h13l2 16v2h-15z', top: 'm30 55h15l-2 2h-13z', side: 'm45 55-2 2 2 16z', front: { main: 'C', mx: 38, my: 72, sub: '8', sx: 33, sy:62 } },
+		{ name: 'v', back: 'm45 57h13l2 16v2h-15z', top: 'm45 55h15l-2 2h-13z', side: 'm60 55-2 2 2 16z', front: { main: 'V', mx: 53, my: 72, sub: '9', sx: 48, sy: 62 } },
+		{ name: 'space', back: 'm60 55h30l-2 18h-26z', top: 'm60 55v20l2-2-2-18zm30 0-2 18 2 2v-20z', side: 'm62 73h26l2 2h-30z', front: 'm67.5 62.5v1h15v-1z' },
+		{ name: 'b', back: 'm92 57h13v18h-15v-2z', top: 'm90 55h15v2h-13z', side: 'm92 57-2-2v18z', front: { main: 'B', mx: 97, my: 72, sub: '.', sx: 102, sy: 62 } },
+		{ name: 'n', back: 'm107 57h13v18h-15v-2z', top: 'm105 55h15v2h-13z', side: 'm107 57-2-2v18z', front: { main: 'N', mx: 112, my: 72, sub: ',', sx: 117, sy: 62 } },
+		{ name: 'm', back: 'm122 57h13v18h-15v-2z', top: 'm120 55h15v2h-13z', side: 'm122 57-2-2v18z', front: { main: 'M', mx: 127, my: 72, sub: '?', sx: 132, sy: 62, } },
+		{ name: 'enter', back: 'm137 57h13v8l-10 10h-5v-2z', top: 'm135 55h15v2h-13z', side: 'm137 57-2-2v18z', front: 'm145.5 61.5v3h-4v-1.1934l-5.082 1.6934 5.082 1.6934v-1.1934h5v-4z' },
 	];
+
+	const keytable: { [ keys in TITAN_POCKET_KEYS ]: { d: string, s: string, a: string } } =
+	{
+		shift: { d: 'Shift', s: 'Shift', a: 'Shift' },
+		symbol: { d: 'Symbol', s: 'Symbol', a: 'Symbol' },
+		back: { d: '', s: '', a: '' },
+		finger: { d: '', s: '', a: '' },
+		menu: { d: '', s: '', a: '' },
+		fn: { d: 'Unidefined', s: 'Unidefined', a: 'Unidefined' },
+		alt: { d: 'Alt', s: 'Alt', a: 'Alt' },
+
+		q: { d: 'q', s: 'Q', a: '0' },
+		w: { d: 'w', s: 'W', a: '1' },
+		e: { d: 'e', s: 'E', a: '2' },
+		r: { d: 'r', s: 'R', a: '3' },
+		t: { d: 't', s: 'T', a: '(' },
+		y: { d: 'y', s: 'Y', a: ')' },
+		u: { d: 'u', s: 'U', a: '-' },
+		i: { d: 'i', s: 'I', a: '_' },
+		o: { d: 'o', s: 'O', a: '/' },
+		p: { d: 'p', s: 'P', a: ':' },
+
+		a: { d: 'a', s: 'A', a: '@' },
+		s: { d: 's', s: 'S', a: '4' },
+		d: { d: 'd', s: 'D', a: '5' },
+		f: { d: 'f', s: 'F', a: '6' },
+		g: { d: 'g', s: 'G', a: '*' },
+		h: { d: 'h', s: 'H', a: '#' },
+		j: { d: 'j', s: 'J', a: '+' },
+		k: { d: 'k', s: 'K', a: '"' },
+		l: { d: 'l', s: 'L', a: "'" },
+		backspace: { d: 'Backspace', s: 'Backspace', a: 'Backspace' },
+
+		z: { d: 'z', s: 'Z', a: '!' },
+		x: { d: 'x', s: 'X', a: '7' },
+		c: { d: 'c', s: 'C', a: '8' },
+		v: { d: 'v', s: 'V', a: '9' },
+		space: { d: ' ', s: ' ', a: '' },
+		b: { d: 'b', s: 'B', a: '.' },
+		n: { d: 'n', s: 'N', a: ',' },
+		m: { d: 'm', s: 'M', a: '?' },
+		enter: { d: 'Enter', s: 'Enter', a: 'Enter' },
+	};
 
 	const keymap: { [ keys in TITAN_POCKET_KEYS ]: KeyData } =
 	{
@@ -101,6 +212,7 @@ interface KeyboardPushEvent extends CustomEvent
 	} )( class extends HTMLElement implements TitanPocketKeyboardElement
 	{
 		private keyboard: SVGSVGElement;
+		private sp: { shift: SVGPathElement, alt: SVGPathElement } = { shift: <any>null, alt: <any>null }
 
 		constructor()
 		{
@@ -125,11 +237,11 @@ interface KeyboardPushEvent extends CustomEvent
 				'svg text.main { font-size: 12px; }',
 				'svg text.sub { font-size: 7px; }',
 				'svg text.menu { font-size: 8px; }',
-				'svg path.highlight { fill: var( --highlight ); }',
+				'svg path.highlight, :host( [ shift ] ) svg path#shift.push, :host( [ alt ] ) svg path#alt.push { fill: var( --highlight ); }',
 				':host( [ disable ] ) svg g { opacity: 0.5; }',
 				':host( [ disable ] ) svg g .button { pointer-events: none; }',
 				'svg g.hide .button { pointer-events: none; }',
-				'svg g.hide text, svg g.hide .front, :host( [ hidesub ] ) svg g text.sub { display: none; }',
+				'svg g.hide text, svg g.hide .front, :host( [ hidealt ] ) svg g text.sub { display: none; }',
 			].join( '' );
 
 			const back = document.createElementNS( 'http://www.w3.org/2000/svg', 'path' );
@@ -164,9 +276,35 @@ interface KeyboardPushEvent extends CustomEvent
 				this.keyboard.appendChild( group );
 
 				back.classList.add( 'button' );
-				back.addEventListener( 'click', () => {
+				const isSp = button.name === 'shift' || button.name === 'alt';
+				if ( isSp )
+				{
+					this.sp[ <'shift'|'alt'>button.name ] = back;
+				}
+				back.addEventListener( 'click', isSp ? () =>
+				{
+					console.log(button.name,this.mode(),keytable[ button.name ][ this.mode() ]);
+					const name = <'shift'|'alt'>button.name;
+					const data = Object.assign(
+						{
+							button: name,
+							key: keytable[ name ][ this.mode() ],
+							shiftKey: this.pushedShift,
+							altKey: this.pushedAlt,
+							usable: 0 <= keymap[ name ].keyCode,
+						}, keymap[ name ] );
+					this.dispatchEvent( new CustomEvent<KeyboardPushData>( 'push', { detail: data } ) );
+				} : () => {
+					console.log(button.name,this.mode(),keytable[ button.name ][ this.mode() ]);
 					const name = <TITAN_POCKET_KEYS>button.name;
-					const data = Object.assign( { button: name, usable: 0 <= keymap[ name ].keyCode }, keymap[ name ] );
+					const data = Object.assign(
+						{
+							button: name,
+							key: keytable[ name ][ this.mode() ],
+							shiftKey: this.pushedShift,
+							altKey: this.pushedAlt,
+							usable: 0 <= keymap[ name ].keyCode,
+						}, keymap[ name ] );
 					this.dispatchEvent( new CustomEvent<KeyboardPushData>( 'push', { detail: data } ) );
 				} );
 
@@ -211,6 +349,21 @@ interface KeyboardPushEvent extends CustomEvent
 			shadow.appendChild( contents );
 		}
 
+		protected mode(): 'd' | 's' | 'a'
+		{
+			if ( this.pushedShift )
+			{
+				return 's';
+			}
+
+			if ( this.pushedAlt )
+			{
+				return 'a';
+			}
+
+			return 'd';
+		}
+
 		protected searchButtonId( key: string | number )
 		{
 			if ( keymap[ <TITAN_POCKET_KEYS>key ] ) { return <string>key; }
@@ -229,6 +382,28 @@ interface KeyboardPushEvent extends CustomEvent
 			const id = this.searchButtonId( key );
 			if ( !id ) { return null; }
 			return <SVGPathElement>this.keyboard.getElementById( id );
+		}
+
+		public push( key: string | number )
+		{
+			const button = this.searchButton( key );
+			if ( button )
+			{
+				const name = button.id;
+				this.unlight();
+				if ( ( this.shift && name === 'shift' ) || ( this.alt && name === 'alt' ) )
+				{
+					this.sp[ name === 'shift' ? 'alt' : 'shift' ].classList.remove( 'push' );
+					this.sp[ name ].classList.toggle( 'push' );
+				} else
+				{
+					this.sp.shift.classList.remove( 'push' );
+					this.sp.alt.classList.remove( 'push' );
+					this.light( name );
+				}
+			}
+
+			return this;
 		}
 
 		public light( key: string | number )
@@ -256,7 +431,7 @@ interface KeyboardPushEvent extends CustomEvent
 			return this;
 		}
 
-		public showKey( key?: string | number ): TitanPocketKeyboardElement
+		public showButton( key?: string | number ): TitanPocketKeyboardElement
 		{
 			if ( key !== undefined )
 			{
@@ -273,7 +448,7 @@ interface KeyboardPushEvent extends CustomEvent
 			return this;
 		}
 
-		public hideKey( key?: string | number ): TitanPocketKeyboardElement
+		public hideButton( key?: string | number ): TitanPocketKeyboardElement
 		{
 			if ( key !== undefined )
 			{
@@ -293,7 +468,16 @@ interface KeyboardPushEvent extends CustomEvent
 		get disable() { return this.hasAttribute( 'disable' ); }
 		set disable( value ) { if ( value ) { this.setAttribute( 'disable', '' ); } else { this.removeAttribute( 'disable' ); } }
 
-		get hidesub() { return this.hasAttribute( 'hidesub' ); }
-		set hidesub( value ) { if ( value ) { this.setAttribute( 'hidesub', '' ); } else { this.removeAttribute( 'hidesub' ); } }
+		get hidealt() { return this.hasAttribute( 'hidealt' ); }
+		set hidealt( value ) { if ( value ) { this.setAttribute( 'hidealt', '' ); } else { this.removeAttribute( 'hidealt' ); } }
+		
+		get shift() { return this.hasAttribute( 'shift' ); }
+		set shift( value ) { if ( value ) { this.setAttribute( 'shift', '' ); } else { this.removeAttribute( 'shift' ); } }
+
+		get alt() { return this.hasAttribute( 'alt' ); }
+		set alt( value ) { if ( value ) { this.setAttribute( 'alt', '' ); } else { this.removeAttribute( 'alt' ); } }
+
+		get pushedShift() { return this.sp.shift.classList.contains( 'push' ); }
+		get pushedAlt() { return this.sp.alt.classList.contains( 'push' ); }
 	}, script.dataset.tagname );
 } );
