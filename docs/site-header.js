@@ -17,6 +17,8 @@
             style.innerHTML =
                 [
                     ':host { display: block; background: #d8ddf5; font-size: 2rem; }',
+                    'div { overflow-x: auto; overflow-y: hidden; height: 3.2rem; display: flex; scrollbar-width: none; }',
+                    'div::-webkit-scrollbar { display: none; }',
                     'a { text-decoration: none; display: inline-block; margin: 0.2rem 0.4rem; } }',
                 ].join('');
             const contents = document.createElement('div');
@@ -27,6 +29,7 @@
                 { name: 'Scroll', url: './scroll.html' },
                 { name: 'Info', url: './info.html' },
                 { name: 'PWA', url: './pwa.html' },
+                { name: 'Map', url: './map.html' },
             ].forEach((item) => {
                 const a = document.createElement('a');
                 a.textContent = item.name;

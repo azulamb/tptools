@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>TitanPocket tools</title>
+<script src="./site-header.js"></script>
+<script src="./tplib.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () =>
+{
+	function SetPos( obj, x, y )
+	{
+		const floor = document.querySelector( `.blocks > [ data-x="${ x }" ][ data-y="${ y }" ]` );
+		if ( !floor ) { return; }
+		obj.style.left = `${ floor.offsetLeft }px`;
+		obj.style.top = `${ floor.offsetTop }px`;
+		obj.dataset.x = `${ x }`;
+		obj.dataset.y = `${ y }`;
+	}
+	function Move( x, y, d )
+	{
+		switch ( d )
+		{
+			case 'up': return [ x, y - 1 ];
+			case 'down': return [ x, y + 1 ];
+			case 'left': return [ x - 1, y ];
+			case 'right': return [ x + 1, y ];
+		}
+		return [ x, y ];
+	}
+
+	( ( chara ) =>
+	{
+		SetPos( chara, 4, 4 );
+		const keyconfig = {
+			82: 'up', // r
+			68: 'left', // d
+			70: 'a', // f
+			71: 'right', //g
+			86: 'down', // v
+		};
+		window.addEventListener( 'keydown', ( event ) =>
+		{
+			const key = keyconfig[ event.keyCode ];
+			if ( !key ) { return; }
+			const bx = parseInt( chara.dataset.x );
+			const by = parseInt( chara.dataset.y );
+			const [ nx, ny ] = Move( bx, by, key );
+			if ( bx === nx && by === ny )
+			{
+				SetPos( chara, 4, 4 );
+				return;
+			}
+			SetPos( chara, nx, ny );
+		} );
+	} )( document.getElementById( 'chara' ) );
+} );
+TitanPocket.enableFullscreenViewport();
+</script>
+<style>
+:root { --size: 74px; }
+html, body { margin: 0; padding: 0; }
+body { overflow: hidden; }
+body > div { position: relative; top: 0; left: 0; width: 714px; height: 714px; }
+div.blocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; background: black; }
+div.blocks > button { display: block; background: gray; box-sizing: border-box; width: var( --size ); height: var( --size ); }
+div.obj { position: absolute; width: var( --size ); height: var( --size ); background: blue; transition: left 0.1s, top 0.1s; }
+</style>
+</head>
+<body>
+	<div>
+		<div class="blocks">
+			<button data-x="0" data-y="0"></button>
+			<button data-x="1" data-y="0"></button>
+			<button data-x="2" data-y="0"></button>
+			<button data-x="3" data-y="0"></button>
+			<button data-x="4" data-y="0"></button>
+			<button data-x="5" data-y="0"></button>
+			<button data-x="6" data-y="0"></button>
+			<button data-x="7" data-y="0"></button>
+			<button data-x="8" data-y="0"></button>
+			<button data-x="0" data-y="1"></button>
+			<button data-x="1" data-y="1"></button>
+			<button data-x="2" data-y="1"></button>
+			<button data-x="3" data-y="1"></button>
+			<button data-x="4" data-y="1"></button>
+			<button data-x="5" data-y="1"></button>
+			<button data-x="6" data-y="1"></button>
+			<button data-x="7" data-y="1"></button>
+			<button data-x="8" data-y="1"></button>
+			<button data-x="0" data-y="2"></button>
+			<button data-x="1" data-y="2"></button>
+			<button data-x="2" data-y="2"></button>
+			<button data-x="3" data-y="2"></button>
+			<button data-x="4" data-y="2"></button>
+			<button data-x="5" data-y="2"></button>
+			<button data-x="6" data-y="2"></button>
+			<button data-x="7" data-y="2"></button>
+			<button data-x="8" data-y="2"></button>
+			<button data-x="0" data-y="3"></button>
+			<button data-x="1" data-y="3"></button>
+			<button data-x="2" data-y="3"></button>
+			<button data-x="3" data-y="3"></button>
+			<button data-x="4" data-y="3"></button>
+			<button data-x="5" data-y="3"></button>
+			<button data-x="6" data-y="3"></button>
+			<button data-x="7" data-y="3"></button>
+			<button data-x="8" data-y="3"></button>
+			<button data-x="0" data-y="4"></button>
+			<button data-x="1" data-y="4"></button>
+			<button data-x="2" data-y="4"></button>
+			<button data-x="3" data-y="4"></button>
+			<button data-x="4" data-y="4"></button>
+			<button data-x="5" data-y="4"></button>
+			<button data-x="6" data-y="4"></button>
+			<button data-x="7" data-y="4"></button>
+			<button data-x="8" data-y="4"></button>
+			<button data-x="0" data-y="5"></button>
+			<button data-x="1" data-y="5"></button>
+			<button data-x="2" data-y="5"></button>
+			<button data-x="3" data-y="5"></button>
+			<button data-x="4" data-y="5"></button>
+			<button data-x="5" data-y="5"></button>
+			<button data-x="6" data-y="5"></button>
+			<button data-x="7" data-y="5"></button>
+			<button data-x="8" data-y="5"></button>
+			<button data-x="0" data-y="6"></button>
+			<button data-x="1" data-y="6"></button>
+			<button data-x="2" data-y="6"></button>
+			<button data-x="3" data-y="6"></button>
+			<button data-x="4" data-y="6"></button>
+			<button data-x="5" data-y="6"></button>
+			<button data-x="6" data-y="6"></button>
+			<button data-x="7" data-y="6"></button>
+			<button data-x="8" data-y="6"></button>
+			<button data-x="0" data-y="7"></button>
+			<button data-x="1" data-y="7"></button>
+			<button data-x="2" data-y="7"></button>
+			<button data-x="3" data-y="7"></button>
+			<button data-x="4" data-y="7"></button>
+			<button data-x="5" data-y="7"></button>
+			<button data-x="6" data-y="7"></button>
+			<button data-x="7" data-y="7"></button>
+			<button data-x="8" data-y="7"></button>
+			<button data-x="0" data-y="8"></button>
+			<button data-x="1" data-y="8"></button>
+			<button data-x="2" data-y="8"></button>
+			<button data-x="3" data-y="8"></button>
+			<button data-x="4" data-y="8"></button>
+			<button data-x="5" data-y="8"></button>
+			<button data-x="6" data-y="8"></button>
+			<button data-x="7" data-y="8"></button>
+			<button data-x="8" data-y="8"></button>
+		</div>
+		<div class="obj" id="chara"></div>
+	</div>
+</body>
+</html>
