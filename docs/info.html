@@ -4,11 +4,13 @@
 <meta charset="utf-8">
 <title>TitanPocket tools</title>
 <script src="./site-header.js"></script>
+<script src="./tplib.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
 	document.getElementById( 'ua' ).textContent = navigator.userAgent;
 	document.getElementById( 'uad' ).textContent = navigator.userAgentData ? JSON.stringify( navigator.userAgentData.toJSON() ) : 'Not supported';
+	document.getElementById( 'tp' ).textContent = TitanPocket.isTitanPocket + '';
 	document.getElementById( 'ss' ).textContent = `${ window.parent.screen.width } x ${ window.parent.screen.height }`;
 	document.getElementById( 'ws' ).textContent = `${ window.innerWidth } x ${ window.innerHeight }`;
 } );
@@ -23,6 +25,8 @@ window.addEventListener('DOMContentLoaded', () =>
 		<dd id="ua"></dd>
 		<dt>UserAgentData</dt>
 		<dd id="uad"></dd>
+		<dt>Is Titan Pocket</dt>
+		<dd id="tp"></dd>
 		<dt>Screen size</dt>
 		<dd id="ss"></dd>
 		<dt>WIndow size</dt>
