@@ -12,7 +12,7 @@ declare const TitanPocket: TitanPocketLibrary;
 
 		constructor()
 		{
-			this.isTP = !!navigator.userAgent.match( /Titan Pocket/ );
+			this.isTP = !!navigator.userAgent.match( /Titan pocket/ );
 		}
 
 		get isTitanPocket() { return this.isTP; }
