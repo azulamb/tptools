@@ -26,6 +26,7 @@
                 { name: 'Keyboard', url: './keyboard.html' },
                 { name: 'Scroll', url: './scroll.html' },
                 { name: 'Info', url: './info.html' },
+                { name: 'PWA', url: './pwa.html' },
             ].forEach((item) => {
                 const a = document.createElement('a');
                 a.textContent = item.name;
