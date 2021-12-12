@@ -12,10 +12,15 @@ window.addEventListener('DOMContentLoaded', () =>
 {
 	document.getElementById( 'pf' ).textContent = window.matchMedia('(display-mode: fullscreen)').matches ? 'PWA' : 'Browser';
 	document.getElementById( 'ws' ).textContent = `${ window.innerWidth } x ${ window.innerHeight }`;
+	document.getElementById( 'reload' ).addEventListener( 'click', () => { location.reload( true ); } );
 } );
 </script>
 <style>
 body { overflow: hidden; }
+div.blocks { display: flex; gap: 1px; background: black; }
+div.blocks > button { display: block; background: white; box-sizing: border-box; width: var( --size ); height: var( --size ); }
+div.blocks.s11 > button { --size: calc( 5 * 13px ); }
+div.blocks.s13 > button { --size: calc( 5 * 11px ); }
 </style>
 </head>
 <body>
@@ -26,6 +31,39 @@ body { overflow: hidden; }
 		<dt>WIndow size</dt>
 		<dd id="ws"></dd>
 	</dl>
+	<button id="reload">Reload</button>
+
+	<div style="position:absolute;left:0;width:716px;">
+		<div class="blocks s11">
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+		</div>
+		<div class="blocks s13">
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+			<button></button>
+		</div>
+	</div>
+
 	<div style="position:absolute;bottom:0;left:0;width:716px;height:40px;background:red;"></div>
 	<div style="position:absolute;bottom:0;left:0;width:715px;height:35px;background:darkgray;"></div>
 </body>
