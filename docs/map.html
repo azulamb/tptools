@@ -8,14 +8,33 @@
 <script>
 window.addEventListener('DOMContentLoaded', () =>
 {
+	function SetObj( obj )
+	{
+		const transition = [];
+		obj.addEventListener( 'transitionstart', ( event ) =>
+		{
+			transition.push( event.propertyName );
+			obj.classList.add( 'lock' );
+		} );
+		obj.addEventListener( 'transitionend', ( event ) =>
+		{
+			const index = transition.indexOf( event.propertyName );
+			if ( 0 <= index ) { transition.splice( index, 1 ); }
+			if ( transition.length <= 0 )
+			{
+				obj.classList.remove( 'lock' );
+			}
+		} );
+	}
 	function SetPos( obj, x, y )
 	{
 		const floor = document.querySelector( `.blocks > [ data-x="${ x }" ][ data-y="${ y }" ]` );
-		if ( !floor ) { return; }
+		if ( !floor ) { return false; }
 		obj.style.left = `${ floor.offsetLeft }px`;
 		obj.style.top = `${ floor.offsetTop }px`;
 		obj.dataset.x = `${ x }`;
 		obj.dataset.y = `${ y }`;
+		return true;
 	}
 	function Move( x, y, d )
 	{
@@ -31,6 +50,7 @@ window.addEventListener('DOMContentLoaded', () =>
 
 	( ( chara ) =>
 	{
+		SetObj( chara );
 		SetPos( chara, 4, 4 );
 		const keyconfig = {
 			82: 'up', // r
@@ -40,6 +60,7 @@ window.addEventListener('DOMContentLoaded', () =>
 		};
 		window.addEventListener( 'keydown', ( event ) =>
 		{
+			if ( chara.classList.contains( 'lock' ) ) { return; }
 			const key = keyconfig[ event.keyCode ];
 			if ( !key ) { return; }
 			const bx = parseInt( chara.dataset.x );
@@ -47,10 +68,12 @@ window.addEventListener('DOMContentLoaded', () =>
 			const [ nx, ny ] = Move( bx, by, key );
 			if ( bx === nx && by === ny )
 			{
-				SetPos( chara, 4, 4 );
 				return;
 			}
-			SetPos( chara, nx, ny );
+			if ( SetPos( chara, nx, ny ) )
+			{
+				chara.classList.add( 'lock' );
+			}
 		} );
 	} )( document.getElementById( 'chara' ) );
 } );
@@ -63,7 +86,7 @@ body { overflow: hidden; }
 body > div { position: relative; top: 0; left: 0; width: 714px; height: 714px; }
 div.blocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; background: black; }
 div.blocks > button { display: block; background: gray; box-sizing: border-box; width: var( --size ); height: var( --size ); }
-div.obj { position: absolute; width: var( --size ); height: var( --size ); background: blue; transition: left 0.1s, top 0.1s; }
+div.obj { position: absolute; width: var( --size ); height: var( --size ); background: blue; transition: left 0.1s, top 0.1s; transition-timing-function: steps( 4, end ); }
 </style>
 </head>
 <body>
